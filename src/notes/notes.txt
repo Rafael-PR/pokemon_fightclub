@@ -1,0 +1,20 @@
+Installed 
+
+++ For more Styles in Bootstrap++++++++++++++++++
+npm i mdbootstrap
+++ For icons ++++++++++++++++++++++++++++++++++++
+npm i @fortawesome/fontawesome-free@5.5.0-1
+++ MD Bootstrap for REACT ++++++++++++++++++++++
+npm install --save mdbreact
+
+
+Steps i did:
+
+# configured the files in "index.js"
+
+# Added fontawesome online Link in "index.html"
+https://pro.fontawesome.com/releases/v5.10.0/css/all.css
+why ->
+https://fontawesome.com/how-to-use/customizing-wordpress/snippets/setup-cdn-webfont
+
+
