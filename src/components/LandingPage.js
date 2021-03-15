@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-
+import {Link} from 'react-router-dom';
 import {
     Player,
     ControlBar,
@@ -37,10 +37,10 @@ export default () => {
             </Player>
 </MDBContainer>
             
-          
+         <Link to="/arena" >
             <MDBBtn rounded outline color="info"> <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
                 width:40}}/>ENTER ARENA</MDBBtn>
-        
+        </Link>
     </div>
     </>
   );

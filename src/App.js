@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
-  BrowserRouter as Router,
+ 
   Switch,
   Route,
   Link
@@ -14,16 +14,23 @@ import { MDBFreeBird, MDBInput, MDBCol, MDBRow, MDBCardBody, MDBCardTitle, MDBBt
 
 import Footer from './components/Footer';
 import LandingPage from './components/LandingPage';
-import NavBar from './components/NavBar'
+import NavBar from './components/NavBar';
+import Dashboard from './components/Dashboard';
+import Arena from './components/Arena'
 
 
 function App() {
   
   return (<>
    <NavBar/>
-   
-   <LandingPage/>
+   <Switch>
+            <Route path="/arena" component={Arena}/>
+            <Route path="/choosePlayer" component={Dashboard}/>
+            <Route exact path="/"component={LandingPage} />
+       
+    </Switch>
    <Footer />
+
   </>
 
     
