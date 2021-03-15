@@ -36,11 +36,14 @@ export default () => {
                 </ControlBar>
             </Player>
 </MDBContainer>
-            
+        <MDBContainer className="p-3">
          <Link to="/arena" >
-            <MDBBtn rounded outline color="info"> <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
+            <MDBBtn rounded outline color="info" > 
+            <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
                 width:40}}/>ENTER ARENA</MDBBtn>
+        
         </Link>
+        </MDBContainer>
     </div>
     </>
   );
