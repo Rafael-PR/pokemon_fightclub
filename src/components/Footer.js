@@ -12,9 +12,10 @@ const FooterPage = () => {
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
     }}>
+
    <MDBMask overlay="blue-light" >
       <MDBContainer fluid className="text-center text-md-left pt-5" >
-          
+        
         <MDBRow >
           <MDBCol md="6" >
             <h4>
@@ -64,7 +65,7 @@ const FooterPage = () => {
           &copy; {new Date().getFullYear()} Copyright: <a href="https://github.com/Rafael-PR/pokemon_fightclub"> Rafazar, Selmasam, Christimon </a>
         </MDBContainer>
       </div>
-     </MDBMask> 
+    </MDBMask> 
     </MDBFooter>
   
   );

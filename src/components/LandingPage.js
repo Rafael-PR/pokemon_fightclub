@@ -18,6 +18,7 @@ import { MDBFreeBird, MDBInput, MDBCol, MDBRow, MDBCardBody, MDBCardTitle, MDBBt
 export default () => {
   return (
     <>
+
      <main>
           <MDBContainer className="text-center my-5" >
             <p align="justify">Ich will der allerbeste sein,
@@ -87,9 +88,10 @@ Komm schnapp sie dir, komm und schnapp sie dir.
 Pokemon</p>
           </MDBContainer>
        
-    <div className="text-center p-5" d-flex >
+    <div className="text-center p-5 d-flex"  >
+
     <MDBContainer size="md">
-    <Player poster={process.env.PUBLIC_URL + '/img/pokefight.jpg'}>
+     <Player poster={process.env.PUBLIC_URL + '/img/pokefight.jpg'}>
                 <source src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4" />
                 <source src="http://mirrorblender.top-ix.org/movies/sintel-1024-surround.mp4" />
                 <BigPlayButton position="center" />
@@ -103,8 +105,10 @@ Pokemon</p>
                     <VolumeMenuButton disabled />
                     
                 </ControlBar>
-            </Player>
-  </MDBContainer>
+
+            </Player> 
+</MDBContainer>
+
         <MDBContainer className="p-3">
          <Link to="/arena" >
             <MDBBtn rounded outline color="info" > 
