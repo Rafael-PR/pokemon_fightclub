@@ -18,9 +18,80 @@ import { MDBFreeBird, MDBInput, MDBCol, MDBRow, MDBCardBody, MDBCardTitle, MDBBt
 export default () => {
   return (
     <>
+
+     <main>
+          <MDBContainer className="text-center my-5" >
+            <p align="justify">Ich will der allerbeste sein,
+Wie keiner vor mir war.
+Ganz allein fang ich sie mir,
+Ich kenne die Gefahr.
+
+Ich streife durch das ganze Land,
+Ich suche weit und breit,
+Das Pokemon um zu verstehen,
+Was ihm diese Macht verleiht.
+
+Pokemon
+Komm' schnapp' sie dir.
+(Nur ich und du)
+In allem was ich auch tu
+Pokemon
+Oh mein bester Freund
+Komm retten wir die Welt
+Pokemon
+Dein Herz ist gut
+Wir vertrauen auf unseren Mut
+Ich lern von dir und du von mir
+Pokemon
+
+Egal wie schwer mein weg auch ist
+Ich nehme es in kauf
+Ich will den Platz der mir gehört
+Ich gebe niemals auf
+
+Komm zeigen wir der ganzen Welt
+Das wir Freunde sind
+Gemeinsam zieh'n wir in den Kampf
+Das besste Team gewinnt.
+
+Pokemon
+Komm' schnapp' sie dir.
+(Nur ich und du)
+In allem was ich auch tu
+Pokemon
+Oh mein bester Freund
+Komm retten wir die Welt
+Pokemon
+Dein Herz ist gut
+Wir vertrauen auf unseren Mut
+Ich lern von dir und du von mir
+Pokemon
+
+Komm schnapp sie dir, komm und schnapp sie dir.
+Komm und schnapp sie dir.
+Komm und schnapp sie dir!
+
+Pokemon
+Komm' schnapp' sie dir.
+(Nur ich und du)
+In allem was ich auch tu
+Pokemon
+Oh mein bester Freund
+Komm retten wir die Welt
+Pokemon
+Dein Herz ist gut
+Wir vertrauen auf unseren Mut
+Ich lern von dir und du von mir
+Pokemon
+
+Komm schnapp sie dir, komm und schnapp sie dir.
+Pokemon</p>
+          </MDBContainer>
+       
     <div className="text-center p-5 d-flex"  >
+
     <MDBContainer size="md">
-    {/* <Player poster={process.env.PUBLIC_URL + '/img/pokefight.jpg'}>
+     <Player poster={process.env.PUBLIC_URL + '/img/pokefight.jpg'}>
                 <source src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4" />
                 <source src="http://mirrorblender.top-ix.org/movies/sintel-1024-surround.mp4" />
                 <BigPlayButton position="center" />
@@ -34,8 +105,10 @@ export default () => {
                     <VolumeMenuButton disabled />
                     
                 </ControlBar>
-            </Player> */}
+
+            </Player> 
 </MDBContainer>
+
         <MDBContainer className="p-3">
          <Link to="/arena" >
             <MDBBtn rounded outline color="info" > 
@@ -45,6 +118,7 @@ export default () => {
         </Link>
         </MDBContainer>
     </div>
+    </main>
     </>
   );
 };

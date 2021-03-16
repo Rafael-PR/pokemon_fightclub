@@ -31,13 +31,13 @@ class NavBar extends React.Component {
               <MDBCollapse isOpen={this.state.collapse} navbar>
                 <MDBNavbarNav left>
                   <MDBNavItem active>
-                    <MDBNavLink to="#">ARENA</MDBNavLink>
+                    <MDBNavLink to="/arena">ARENA</MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink to="#">Fight</MDBNavLink>
+                    <MDBNavLink to="/choosePlayer">Choose Pokemon</MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
-                    <MDBNavLink to="#">Contact</MDBNavLink>
+                    <MDBNavLink to="/contact">Contact</MDBNavLink>
                   </MDBNavItem>
                 </MDBNavbarNav>
               </MDBCollapse>
@@ -58,75 +58,7 @@ class NavBar extends React.Component {
           </MDBView>
         </header>
 
-        <main>
-          <MDBContainer className="text-center my-5" >
-            <p align="justify">Ich will der allerbeste sein,
-Wie keiner vor mir war.
-Ganz allein fang ich sie mir,
-Ich kenne die Gefahr.
-
-Ich streife durch das ganze Land,
-Ich suche weit und breit,
-Das Pokemon um zu verstehen,
-Was ihm diese Macht verleiht.
-
-Pokemon
-Komm' schnapp' sie dir.
-(Nur ich und du)
-In allem was ich auch tu
-Pokemon
-Oh mein bester Freund
-Komm retten wir die Welt
-Pokemon
-Dein Herz ist gut
-Wir vertrauen auf unseren Mut
-Ich lern von dir und du von mir
-Pokemon
-
-Egal wie schwer mein weg auch ist
-Ich nehme es in kauf
-Ich will den Platz der mir gehört
-Ich gebe niemals auf
-
-Komm zeigen wir der ganzen Welt
-Das wir Freunde sind
-Gemeinsam zieh'n wir in den Kampf
-Das besste Team gewinnt.
-
-Pokemon
-Komm' schnapp' sie dir.
-(Nur ich und du)
-In allem was ich auch tu
-Pokemon
-Oh mein bester Freund
-Komm retten wir die Welt
-Pokemon
-Dein Herz ist gut
-Wir vertrauen auf unseren Mut
-Ich lern von dir und du von mir
-Pokemon
-
-Komm schnapp sie dir, komm und schnapp sie dir.
-Komm und schnapp sie dir.
-Komm und schnapp sie dir!
-
-Pokemon
-Komm' schnapp' sie dir.
-(Nur ich und du)
-In allem was ich auch tu
-Pokemon
-Oh mein bester Freund
-Komm retten wir die Welt
-Pokemon
-Dein Herz ist gut
-Wir vertrauen auf unseren Mut
-Ich lern von dir und du von mir
-Pokemon
-
-Komm schnapp sie dir, komm und schnapp sie dir.
-Pokemon</p>
-          </MDBContainer>
-        </main>
+       
       </div>
     );
   }
