@@ -20,13 +20,16 @@ import Arena from './components/Arena'
 function App() {
 
   const[pokemon, setPokemon] = useState()
+  const [pageOffset, setPageOffset] =useState(0)
+
+ 
 
   useEffect(()=>{
 
       const getPokemons = async () => {
           let allPokeData = []
           try {
-              const { data: pokemonData } = await axios.get('https://pokeapi.co/api/v2/pokemon')
+              const { data: pokemonData } = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${pageOffset*20}`)
               // console.log(pokemonData.results)
               const individualPokemonData = pokemonData.results.map(async poke => {
                   const pokeData = await axios.get(poke.url)
@@ -58,12 +61,27 @@ function App() {
       //     console.log(err)
       // })
 
-  },[])
+  },[pageOffset])
 
   const handleChoosePokemon = (chosenPokemon) => {
     console.log(chosenPokemon)
   }
-
+  const pageChangesHandler = (e) =>{
+    console.dir(e.target)
+    const page= parseInt(e.target.innerText)
+    if (page){
+      setPageOffset((page-1))
+    }
+    if (e.target.textContent=== "«" && pageOffset>0){
+      setPageOffset((pageOffset-1))
+    }
+    if (e.target.textContent=== "»"){
+      setPageOffset((pageOffset+1))
+    }
+   
+    
+    // setPageOffset((page-1)*20)
+  }
   
   return (<>
     
@@ -73,7 +91,7 @@ function App() {
 
           <Route path="/contact"component={LandingPage} />
             <Route path="/choosePlayer">
-                <Dashboard pokemon={pokemon} onChoosePokemon={handleChoosePokemon}/>
+                <Dashboard pokemon={pokemon}  onChoosePokemon={handleChoosePokemon} pageHandler={pageChangesHandler}/>
               </Route>
             <Route exact path="/"component={LandingPage} />
   </Switch>
