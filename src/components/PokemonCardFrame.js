@@ -1,25 +1,23 @@
-import React from 'react'
-import PokemonCard from './PokemonCard'
-import Pokemon_1 from '../assets/images/Pokemon_1.png';
-import Pokemon_2 from '../assets/images/Pokemon_2.jpeg';
-import Pokemon_3 from '../assets/images/Pokemon_3.png';
-import Pokemon_5 from '../assets/images/Pokemon_5.png';
+import React from 'react';
+import PokemonCard from './PokemonCard';
 
 
-
-
-const PokemonCardFrame = () => {
+const PokemonCardFrame = ({pokemon, onChoosePokemon}) => {
     return (
         <React.Fragment>
-
-        <div className="row">
-            <PokemonCard/>
-            <PokemonCard/>
-            <PokemonCard/>
-            <PokemonCard/>
-            <PokemonCard/>
-            <PokemonCard/>
-        </div>
+            
+                <div className="row">
+                    {pokemon && pokemon.map(onePokemon=>(
+                    <PokemonCard
+                        key={onePokemon.name}
+                        //Da die Pokemon alle einen untersch. Namen habe dient er als key/ID
+                        pokemonData={onePokemon}
+                        onChoosePokemon={onChoosePokemon}
+                        //Könnte hier auch mit SpreadOperator arbeiten {..onePokemon}
+                        //destructiert ist in PokemonCard in Line 12
+                    />
+                        ))}
+                </div>
             
             
             

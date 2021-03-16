@@ -12,9 +12,10 @@ const FooterPage = () => {
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
     }}>
+
    <MDBMask overlay="blue-light" >
       <MDBContainer fluid className="text-center text-md-left pt-5" >
-          
+        
         <MDBRow >
           <MDBCol md="6" >
             <h4>
@@ -64,7 +65,7 @@ const FooterPage = () => {
           &copy; {new Date().getFullYear()} Copyright: <a href="https://www.mdbootstrap.com"> Rafmon, Selmon, Christmon </a>
         </MDBContainer>
       </div>
-     </MDBMask> 
+    </MDBMask> 
     </MDBFooter>
   
   );
