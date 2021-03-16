@@ -1,25 +1,25 @@
+import React,{useState} from "react";
+import { useHistory } from "react-router-dom"
 
-import React from "react";
-import Pokemon_1 from '../assets/images/Pokemon_1.png';
+const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
+    const history = useHistory()
+    const { name } = pokemonData
 
-
-
-
-
-
-const PokemonCard = (props) => {
-
-    console.log(props);
+    const selectPokemon = () => {
+        onChoosePokemon(pokemonData)
+        history.push('/arena')
+    }
 
     return (
         <React.Fragment>
             <div className="col-md-3 col-sm-6 mb-5">
                 <div className="card">
-                    <div className="card-header">HEADER</div>
-                    <div className="card-body">Body - jjnnsocnQCNnqd</div>
-                
+                    <div className="card-header">
+                        <h2>{name}</h2>
+                    </div>
+                    <div className="card-body">Hier kommt dan ein Bild rein und evtl. noch die Superkraft</div>
+                    <button type="button" class="btn btn-primary" onClick={selectPokemon}>Choose Pokemon</button>
                 </div>
-
             </div>
             
         </React.Fragment>

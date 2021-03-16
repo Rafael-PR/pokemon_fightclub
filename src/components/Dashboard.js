@@ -1,14 +1,12 @@
 import React from 'react'
 import PokemonCardFrame from './PokemonCardFrame';
 
-const Dashboard = () => {
+const Dashboard = ({pokemon, onChoosePokemon}) => {
     return (
         <div className="row">
             <div className="col">
-                <PokemonCardFrame/>
+                <PokemonCardFrame pokemon={pokemon} onChoosePokemon={onChoosePokemon}/>
             </div>
-
-            
         </div>
     )
 }
