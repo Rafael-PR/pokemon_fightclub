@@ -19,8 +19,10 @@ import Arena from './components/Arena'
 
 function App() {
 
-  const[pokemon, setPokemon] = useState()
+  const[pokemon, setPokemon] = useState();
+  const [chosenPokemon, setChosenPokemon]= useState();
   const [pageOffset, setPageOffset] =useState(0)
+  const [totalResults, setTotalResults]=useState()
 
  
 
@@ -28,9 +30,10 @@ function App() {
 
       const getPokemons = async () => {
           let allPokeData = []
+          let countResult
           try {
               const { data: pokemonData } = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${pageOffset*20}`)
-              // console.log(pokemonData.results)
+              countResult= pokemonData.count
               const individualPokemonData = pokemonData.results.map(async poke => {
                   const pokeData = await axios.get(poke.url)
                   return pokeData
@@ -40,7 +43,8 @@ function App() {
                       result.forEach(poke => {
                           allPokeData.push(poke.data) 
                       })
-                      setPokemon(allPokeData)
+                      setPokemon(allPokeData);
+                      setTotalResults(countResult)
                   })
 
                   
@@ -63,8 +67,8 @@ function App() {
 
   },[pageOffset])
 
-  const handleChoosePokemon = (chosenPokemon) => {
-    console.log(chosenPokemon)
+  const handleChoosePokemon = (Pokemon) => {
+    setChosenPokemon(Pokemon)
   }
   const pageChangesHandler = (e) =>{
     console.dir(e.target)
@@ -87,13 +91,12 @@ function App() {
     
   <NavBar/>
   <Switch>
-            <Route path="/arena" component={Arena}/>
-
+          <Route path="/arena" render={(props) => chosenPokemon && <Arena {...props} totalCount={totalResults} fightPokemon={chosenPokemon}/>}/>
           <Route path="/contact"component={LandingPage} />
-            <Route path="/choosePlayer">
-                <Dashboard pokemon={pokemon}  onChoosePokemon={handleChoosePokemon} pageHandler={pageChangesHandler}/>
-              </Route>
-            <Route exact path="/"component={LandingPage} />
+          <Route path="/choosePlayer">
+                <Dashboard pokemon={pokemon} totalCount={totalResults} onChoosePokemon={handleChoosePokemon} pageHandler={pageChangesHandler}/>
+          </Route>
+          <Route exact path="/"component={LandingPage} />
   </Switch>
   <Footer />
 
