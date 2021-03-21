@@ -86,12 +86,15 @@ Pokemon
 
 Komm schnapp sie dir, komm und schnapp sie dir.
 Pokemon</p>
-          </MDBContainer>
+</MDBContainer>
        
-    <div className="text-center p-5 d-flex"  >
+    <div  >
 
-    <MDBContainer size="md">
-     <Player poster={process.env.PUBLIC_URL + '/img/pokefight.jpg'}>
+    <MDBContainer className="text-center" >
+    <div style={{paddingTop: 20}}>
+    <iframe src="https://player.vimeo.com/video/315431464?autoplay=1&loop=1&color=5cd7d4&byline=0&portrait=0"  frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div><script src="https://player.vimeo.com/api/player.js"></script>
+     {/* <Player poster={process.env.PUBLIC_URL + '/img/pokefight.jpg'}>
                 <source src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4" />
                 <source src="http://mirrorblender.top-ix.org/movies/sintel-1024-surround.mp4" />
                 <BigPlayButton position="center" />
@@ -106,10 +109,10 @@ Pokemon</p>
                     
                 </ControlBar>
 
-            </Player> 
+            </Player>  */}
 </MDBContainer>
-
-        <MDBContainer className="p-3">
+    </div>
+    <MDBContainer className="text-center">
          <Link to="/arena" >
             <MDBBtn rounded outline color="info" > 
             <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
@@ -117,7 +120,6 @@ Pokemon</p>
         
         </Link>
         </MDBContainer>
-    </div>
     </main>
     </>
   );
