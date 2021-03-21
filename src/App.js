@@ -3,6 +3,7 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 import {
   Switch,
   Route,
@@ -91,7 +92,7 @@ function App() {
     
   <NavBar/>
   <Switch>
-          <Route path="/arena" render={(props) => chosenPokemon && <Arena {...props} totalCount={totalResults} fightPokemon={chosenPokemon}/>}/>
+          <Route path="/arena" render={(props) => chosenPokemon && <Arena {...props} totalCount={totalResults} fightPokemon={chosenPokemon} />}/>
           <Route path="/contact"component={LandingPage} />
           <Route path="/choosePlayer">
                 <Dashboard pokemon={pokemon} totalCount={totalResults} onChoosePokemon={handleChoosePokemon} pageHandler={pageChangesHandler}/>
