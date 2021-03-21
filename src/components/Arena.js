@@ -1,9 +1,11 @@
 import {React, useState, useEffect}  from 'react';
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
-
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBPopoverBody, MDBPopoverHeader, MDBPopover} from 'mdbreact';
+import '../style.css';
 
 const Arena = ({fightPokemon, totalCount}) => {
 
+   
+   
     
     const [enemy, setEnemy]= useState()
     
@@ -27,8 +29,8 @@ const Arena = ({fightPokemon, totalCount}) => {
     return (
         <>
         <div class="container">
-        <div class="row">  
-        <div>Welcome to the Arena</div>
+        <div class="row test">  
+        <div className="arena-header">Welcome to the Arena</div>
         </div>
         <div class="row">
             <div class="col-md">
@@ -44,9 +46,9 @@ const Arena = ({fightPokemon, totalCount}) => {
                     <MDBCardText>
                     Choose your fighting style
                     </MDBCardText>
-                    <MDBBtn outline color="info" >HitPoints</MDBBtn>
-                    <MDBBtn outline color="info" >Experience</MDBBtn>
-                    <MDBBtn outline color="info" >Cuteness</MDBBtn>
+                    <MDBBtn outline color="info" >Speed {fightPokemon.stats[5].base_stat}</MDBBtn>
+                    <MDBBtn outline color="info" >Attack {fightPokemon.stats[1].base_stat}</MDBBtn>
+                    <MDBBtn outline color="info" >Special Attack {fightPokemon.stats[3].base_stat}</MDBBtn>
                     </MDBCardBody>
                
                 </MDBCard>
@@ -65,9 +67,30 @@ const Arena = ({fightPokemon, totalCount}) => {
                     <MDBCardText>
                         Choose your fighting style
                     </MDBCardText>
-                    <MDBBtn outline color="info" >HitPoints</MDBBtn>
-                    <MDBBtn outline color="info" >Experience</MDBBtn>
-                    <MDBBtn outline color="info" >Cuteness</MDBBtn>
+
+                    {/* <MDBPopover placement='bottom' popover clickable id='popper2'>
+                <MDBBtn>Show more details</MDBBtn>
+                    <div>
+                    <MDBPopoverHeader>DETAILS</MDBPopoverHeader>
+                    <MDBPopoverBody>
+                           
+                            <p className="hp-title">Attack:</p>
+                            <p className="hp-type">{fightPokemon.stats[1].base_stat}</p>
+                            <p className="hp-title">Defense:</p>
+                            <p className="hp-type">{fightPokemon.stats[2].base_stat}</p>
+                            <p className="hp-title">Special Attack:</p>
+                            <p className="hp-type">{fightPokemon.stats[3].base_stat}</p>
+                            <p className="hp-title">Special Defense:</p>
+                            <p className="hp-type">{fightPokemon.stats[4].base_stat}</p>
+                            <p className="hp-title">Speed:</p>
+                            <p className="hp-type">{fightPokemon.stats[5].base_stat}</p>
+                        
+                    </MDBPopoverBody>
+                    </div>
+            </MDBPopover> */}
+                    <MDBBtn outline color="info" >Speed</MDBBtn>
+                    <MDBBtn outline color="info" >Atack</MDBBtn>
+                    <MDBBtn outline color="info" >Special Attack</MDBBtn>
                     </MDBCardBody>
                 </MDBCard>
                 
