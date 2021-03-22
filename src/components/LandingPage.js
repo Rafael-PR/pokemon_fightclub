@@ -1,17 +1,6 @@
 import React from 'react';
 import '../App.css';
 import {Link} from 'react-router-dom';
-import {
-    Player,
-    ControlBar,
-    ReplayControl,
-    ForwardControl,
-    CurrentTimeDisplay,
-    TimeDivider,
-    PlaybackRateMenuButton,
-    VolumeMenuButton,
-    BigPlayButton 
-  } from 'video-react';
 import { MDBFreeBird, MDBInput, MDBCol, MDBRow, MDBCardBody, MDBCardTitle, MDBBtn, MDBContainer, MDBEdgeHeader } from
 "mdbreact";
 
@@ -91,9 +80,8 @@ Pokemon</p>
     <div  >
 
     <MDBContainer className="text-center" >
-    <div style={{paddingTop: 20}}>
-    <iframe src="https://player.vimeo.com/video/315431464?autoplay=1&loop=1&color=5cd7d4&byline=0&portrait=0"  frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-    </div><script src="https://player.vimeo.com/api/player.js"></script>
+
+    <iframe src="https://player.vimeo.com/video/315431464?autoplay=1&loop=1&color=5cd7d4&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
      {/* <Player poster={process.env.PUBLIC_URL + '/img/pokefight.jpg'}>
                 <source src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4" />
                 <source src="http://mirrorblender.top-ix.org/movies/sintel-1024-surround.mp4" />
@@ -113,10 +101,10 @@ Pokemon</p>
 </MDBContainer>
     </div>
     <MDBContainer className="text-center">
-         <Link to="/arena" >
+         <Link to="/choosePlayer" >
             <MDBBtn rounded outline color="info" > 
             <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
-                width:40}}/>ENTER ARENA</MDBBtn>
+                width:40}}/>SELECT POKEMON</MDBBtn>
         
         </Link>
         </MDBContainer>
