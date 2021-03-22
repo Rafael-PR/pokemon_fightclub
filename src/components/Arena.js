@@ -1,6 +1,8 @@
 import {React, useState, useEffect}  from 'react';
+import {Link} from 'react-router-dom'
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBPopoverBody, MDBPopoverHeader, MDBPopover} from 'mdbreact';
 import '../style.css';
+import '../App.css'
 
 const Arena = ({fightPokemon, totalCount}) => {
 
@@ -39,6 +41,7 @@ const Arena = ({fightPokemon, totalCount}) => {
             setHp((prevState)=>({poke1: prevState.poke1 ,poke2 : prevState.poke2+ generateRandomAttack() }))
         }
     }
+    
     const counter= ()=>{
  
     if (hp) {
@@ -48,7 +51,7 @@ const Arena = ({fightPokemon, totalCount}) => {
     }
     else return fightPokemon.stats[0].base_stat
 }
-const counter2= ()=>{
+    const counter2= ()=>{
  
     if (hp) {
         if (hp.poke1 && hp.poke1 <1) return "I gotcha!"
@@ -58,50 +61,8 @@ const counter2= ()=>{
     else return enemy.stats[0].base_stat
 }
 
-    // const fight = () => {
-        //       // Naming for Readability
-        //       const pokeOne = data[0].name_upper;
-        //       const pokeTwo = data[1].name_upper;
-        //       let hpOne = data[0].stats[0].base_stat;
-        //       let hpTwo = data[1].stats[0].base_stat;
-        //       const attOne = data[0].stats[1].base_stat;
-        //       const attTwo = data[1].stats[1].base_stat;
-        //       const defOne = data[0].stats[2].base_stat;
-        //       const defTwo = data[1].stats[2].base_stat;
-        //       const battleLog = document.querySelector(".battleLog");
-        //       battleLog.innerHTML = "";
-        //       setHp([100, 100]);
-
-        // const battleLoop = () => {
-        //             if (hpOne <= 0) {
-        //               if (hpTwo <= 0) {
-        //                 battleLog.innerHTML += `<p>What a disaster! Both pokemon faint!</p>`;
-        //               } else {
-        //                 battleLog.innerHTML += `<p>${pokeOne} faints</p>`;
-        //               }
-        //             } else if (hpTwo <= 0) {
-        //               battleLog.innerHTML += `<p>${pokeTwo} faints</p>`;
-        //             } else {
-        //               // Highest Defense Value is 230
-        //               // assign a random value to multiply with for every pokemon "chance"
-        //               let randomOne = Math.random();
-        //               let randomTwo = Math.random();
-        //               battleLog.innerHTML += `<p>Round starts:</p>`;
-        //               battleLog.innerHTML += `<p>${pokeOne} attacks for ${attOne}</p>`;
-        //               hpTwo = hpTwo - Math.floor(attOne * randomOne * (1 - defTwo / 300)) < 0 ? 0 : hpTwo - Math.floor(attOne * randomOne * (1 - defTwo / 300));
-        //               battleLog.innerHTML += `<p>${pokeTwo} defends with a value of ${defTwo} and takes ${Math.floor(attOne * randomOne * (1 - defTwo / 300))} damage.</p>`;
-        //               battleLog.innerHTML += `<p>${pokeTwo} attacks for ${attTwo}</p>`;
-        //               hpOne = hpOne - Math.floor(attTwo * randomTwo * (1 - defOne / 300)) < 0 ? 0 : hpOne - Math.floor(attTwo * randomTwo * (1 - defOne / 300));
-        //               battleLog.innerHTML += `<p>${pokeOne} defends with a value of ${defOne} and takes ${Math.floor(attTwo * randomTwo * (1 - defOne / 300))} damage.</p>`;
-        //               // Divide remaining HP by Original HP then multiply by 100 to get %
-        //               setHp([(hpOne / data[0].stats[0].base_stat) * 100, (hpTwo / data[1].stats[0].base_stat) * 100]);
-        //               setTimeout(battleLoop, 3000);
-        //             }
-        //           };
-        //         //   battleLoop();
-        //         };
     
-     useEffect(()=>{
+useEffect(()=>{
             fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * totalCount)}`)
             .then(response => {
                 if (response.ok) {
@@ -116,7 +77,7 @@ const counter2= ()=>{
                     console.log(jsonResponse)
                     console.log(fightPokemon)
                 })
-        }, [])
+ }, [])
 
 
 
@@ -124,16 +85,16 @@ const counter2= ()=>{
         <>
         <div class="container">
         <div class="row test">  
-        <div className="arena-header">Welcome to the Arena</div>
+        <div className="arena-header bounce">Welcome to the Arena</div>
         </div>
         <div class="row">
             <div class="col-md">
             <MDBCol>
-            <MDBCardImage className="img-fluid" src={fightPokemon.sprites.other["official-artwork"].front_default} waves/>
+            <MDBCardImage className="img-fluid bounceInLeft" src={fightPokemon.sprites.other["official-artwork"].front_default} waves/>
                 <MDBCard style={{ width: "22rem" }} className="my-5">
                     <MDBCardBody>
                     <MDBCardTitle>{fightPokemon.name.toUpperCase()}</MDBCardTitle>
-                    <MDBCardText>
+                    <MDBCardText >
                         Some quick example text to build on the card title and make
                         up the bulk of the card&apos;s content.
                     </MDBCardText>
@@ -141,18 +102,17 @@ const counter2= ()=>{
                     <MDBBtn outline color="info" onClick={defense}>Defense</MDBBtn>
                     <MDBCardText className="mt-3">
                         Remaining HitPoints:
-                        <p  className="text-center font-weight-bold" style={{fontSize:35, color:"#0394fc"}}>{counter()}</p>
+                        <p  className="text-center font-weight-bold bounce" style={{fontSize:35, color:"#0394fc"}}>{counter()}</p>
                     </MDBCardText>
                     </MDBCardBody>
                
                 </MDBCard>
             </MDBCol>
             </div>
-            <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className={`pokeball ${wait? 'visible': 'invisible'}`} alt="logo" style={{
-                width:40, height:40}}/>
+          
             <div class="col-md d-flex justify-content-center">
-            { enemy && <MDBCol >
-            <MDBCardImage className="img-fluid" src={enemy.sprites.other["official-artwork"].front_default} waves />       
+            { enemy? <MDBCol >
+            <MDBCardImage className="img-fluid bounceInRight" src={enemy.sprites.other["official-artwork"].front_default} waves />       
                 <MDBCard style={{ width: "22rem" }} className="my-5">
                     <MDBCardBody>
                     <MDBCardTitle>{enemy.name.toUpperCase()}</MDBCardTitle>
@@ -169,21 +129,25 @@ const counter2= ()=>{
                     </MDBCardBody>
                 </MDBCard>
                 
-            </MDBCol>}
+            </MDBCol> : <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className={`pokeball ${wait? 'visible': 'invisible'}`} alt="logo" style={{
+                width:100, height:100}}/>}
         
             </div>
 
         
         </div>
+        </div>
         <div class="row">
             <div class="col-md d-flex justify-content-center">
+            <Link to="/choosePlayer">
             <MDBBtn outline color="info" > 
+            
             <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
-                width:40}}/>START FIGHT</MDBBtn>
-        
+                width:40}}/>Go Back to select a new Pokemon</MDBBtn>
+            </Link>
             </div>
             </div>
-        </div>
+
 
 
         </>

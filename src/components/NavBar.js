@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBContainer, MDBMask, MDBView } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -24,8 +24,8 @@ class NavBar extends React.Component {
         <header>
           <Router>
             <MDBNavbar color="bg " fixed="top" dark expand="md" scrolling transparent>
-              <MDBNavbarBrand href="/">
-                <strong>Pokekom FightClub</strong>
+              <MDBNavbarBrand >
+                    <MDBNavLink  to="/"> <strong>Pokemom FightClub</strong></MDBNavLink>
               </MDBNavbarBrand>
               {!this.state.isWideEnough && <MDBNavbarToggler onClick={this.onClick} />}
               <MDBCollapse isOpen={this.state.collapse} navbar>
@@ -33,6 +33,7 @@ class NavBar extends React.Component {
                   {/* <MDBNavItem active>
                     <MDBNavLink to="/arena">ARENA</MDBNavLink>
                   </MDBNavItem> */}
+                  <Link to="/choosePlayer"></Link>
                   <MDBNavItem active>
                     <MDBNavLink  to="/choosePlayer">Choose Pokemon</MDBNavLink>
                   </MDBNavItem>

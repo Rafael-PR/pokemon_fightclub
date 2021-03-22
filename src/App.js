@@ -15,15 +15,17 @@ import Footer from './components/Footer';
 import LandingPage from './components/LandingPage';
 import NavBar from './components/NavBar';
 import Dashboard from './components/Dashboard';
-import Arena from './components/Arena'
+import Arena from './components/Arena';
+import Contact from './components/Contact'
 
 
 function App() {
 
   const[pokemon, setPokemon] = useState();
   const [chosenPokemon, setChosenPokemon]= useState();
-  const [pageOffset, setPageOffset] =useState(0)
-  const [totalResults, setTotalResults]=useState()
+  const [pageOffset, setPageOffset] =useState(0);
+  const [totalResults, setTotalResults]=useState(0);
+  const [users, setUsers]=useState()
 
  
 
@@ -68,7 +70,75 @@ function App() {
 
   },[pageOffset])
 
-  const handleChoosePokemon = (Pokemon) => {
+
+// useEffect(()=>{
+//     fetch(`https://pokemon-fightclub.herokuapp.com/users`)
+//     .then(response => {
+//         if (response.ok) {
+//             return response.json();
+//         }
+//         throw new Error('Request failed!');
+//     }, networkError => {
+//         alert("Connection failed, please try again");
+//     })
+//         .then((jsonResponse) => {
+//             setUsers(jsonResponse);
+//             console.log(jsonResponse)
+//         })
+// }, [])
+
+useEffect(()=>{
+  axios.get('https://pokemon-fightclub.herokuapp.com/users')
+  .then(res=>{
+      console.log(res)
+      setUsers(res.data)
+  })
+  .catch(err=>{
+      console.log(err)
+  })
+},[])
+
+
+useEffect(()=>{
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  
+  var raw = JSON.stringify({"email":"ben@t-online.de","password":"passdsfsdfdft","myPokemonId":34,"enemyPokemonId":35,"winner":true});
+  
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  
+  fetch("https://pokemon-fightclub.herokuapp.com/users", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+},[])
+
+
+// const post= ()=> {fetch('https://pokemon-fightclub.herokuapp.com/users', {
+//         method: 'POST',
+//         headers: {
+//           Accept: "application/json",
+//           "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//           "email": "Selmon@t-online.de",
+//           "password": "passwort",
+//           "myPokemonId": 30,
+//           "enemyPokemonId": 40,
+//           "winner": true
+//         })
+//     });
+//   }
+
+
+
+
+const handleChoosePokemon = (Pokemon) => {
     setChosenPokemon(Pokemon)
   }
   const pageChangesHandler = (e) =>{
@@ -93,10 +163,8 @@ function App() {
   <NavBar/>
   <Switch>
           <Route path="/arena" render={(props) => chosenPokemon && <Arena {...props} totalCount={totalResults} fightPokemon={chosenPokemon} />}/>
-          <Route path="/contact"component={LandingPage} />
-          <Route path="/choosePlayer">
-                <Dashboard pokemon={pokemon} totalCount={totalResults} onChoosePokemon={handleChoosePokemon} pageHandler={pageChangesHandler}/>
-          </Route>
+          <Route path="/contact"component={Contact} />
+          <Route path="/choosePlayer" render={(props)=> pokemon && <Dashboard pokemon={pokemon} totalCount={totalResults} onChoosePokemon={handleChoosePokemon} pageHandler={pageChangesHandler}/>} />
           <Route exact path="/"component={LandingPage} />
   </Switch>
   <Footer />
