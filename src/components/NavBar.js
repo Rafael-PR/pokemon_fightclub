@@ -38,6 +38,9 @@ class NavBar extends React.Component {
                     <MDBNavLink  to="/choosePlayer">Choose Pokemon</MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
+                    <MDBNavLink to="/LeaderBoard">LeaderBoard</MDBNavLink>
+                  </MDBNavItem>
+                  <MDBNavItem>
                     <MDBNavLink to="/contact">Contact</MDBNavLink>
                   </MDBNavItem>
                 </MDBNavbarNav>

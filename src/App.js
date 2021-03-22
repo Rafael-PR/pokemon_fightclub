@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
 import {
   Switch,
   Route,
@@ -17,6 +18,7 @@ import NavBar from './components/NavBar';
 import Dashboard from './components/Dashboard';
 import Arena from './components/Arena';
 import Contact from './components/Contact'
+import LeaderBoard from './components/LeaderBoard';
 
 
 function App() {
@@ -161,12 +163,17 @@ const handleChoosePokemon = (Pokemon) => {
   return (<>
     
   <NavBar/>
+ 
   <Switch>
+    
           <Route path="/arena" render={(props) => chosenPokemon && <Arena {...props} totalCount={totalResults} fightPokemon={chosenPokemon} />}/>
           <Route path="/contact"component={Contact} />
           <Route path="/choosePlayer" render={(props)=> pokemon && <Dashboard pokemon={pokemon} totalCount={totalResults} onChoosePokemon={handleChoosePokemon} pageHandler={pageChangesHandler}/>} />
+          <Route path="/leaderBoard"component={LeaderBoard} />
           <Route exact path="/"component={LandingPage} />
+    
   </Switch>
+ 
   <Footer />
 
   </>
