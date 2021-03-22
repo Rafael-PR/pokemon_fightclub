@@ -11,6 +11,10 @@ p {
   justify-content: center;
 }
 
+.btn-primary{
+  background: brown;
+}
+
 .arena-header{
   font-size: 4em;
   font-weight: 600;
@@ -25,11 +29,13 @@ p {
   
 .card-img{
   text-align: center;
+  color:white;
 }
 
 .card-header{
   background-color: #b1d4f0;
   text-align: center;
+  color:white;
 }
 
 .Card__types {
@@ -74,7 +80,7 @@ p {
   display: flex;
   justify-content: center;   
   background-color:grey;
-  color: white;
+  color:white;
   padding: 10px;
 
 }
