@@ -1,6 +1,6 @@
-import {React, useState, useEffect, useLayoutEffect}  from 'react';
+import {React, useState, useEffect}  from 'react';
 import {Link} from 'react-router-dom'
-import { MDBContainer, MDBAlert, MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBPopoverBody, MDBPopoverHeader, MDBPopover} from 'mdbreact';
+import { MDBContainer, MDBAlert, MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol} from 'mdbreact';
 import '../style.css';
 import '../App.css'
 import { Fireworks } from 'fireworks/lib/react'
@@ -28,39 +28,45 @@ const Arena = ({fightPokemon, totalCount}) => {
     const [fightActive, setFightActive]= useState(false);
     const [enemyActive, setEnemyActive]= useState(false)
     const [defenceUsed, setDefenceUsed]= useState({used:false, toWeak: false});
+    const [firework, setFirework]=useState(false)
+    // const [dataForBackend, setDataForBackend] = useState()
 
     
    
-  const generateRandomAttack = ()=>{
-    return Math.floor(Math.random() *20)
-    }
-    
-  const checkEnd = (att) =>{
-      if (hp){
-        if (hp.poke1-att <1) {
-            console.log("poke one lost")
-            setHp((prevState)=>({poke1:"You lost the fight", poke2 : prevState.poke2}))
-            setEndGame(true)
-            return true
+
+
+
+//FIGHT LOGIC
+    const generateRandomAttack = ()=>{
+        return Math.floor(Math.random() *25)
         }
-    }}
-//changes
-const checkEnd1= (att)=>{
-    if (hp){
-        if (hp.poke2-att <1) {
-        console.log("poke two lost")
-        setHp((prevState)=>({poke1:"Yeah you win the fight", poke2 : "You got me..arg"}))
-        setEndGame(true)
-        return true
-    } else return false
-} else return false
-}
-
-
-
+    const checkEnd = (att) =>{
+            if (hp){
+              if (hp.poke1-att <1) {
+                  console.log("poke one lost")
+                  setHp((prevState)=>({poke1:"You lost the fight", poke2 : prevState.poke2}))
+                  safeDataToBackend({myPokemonId: fightPokemon.id, enemyPokemonId :enemy.id, winner:false})
+                  setEndGame(true)
+                  return true
+              }
+          }}
+      
+    const checkEnd1= (att)=>{
+          if (hp){
+              if (hp.poke2-att <1) {
+              console.log("poke two lost")
+              setHp((prevState)=>({poke1:"Yeah you win the fight", poke2 : "You got me..arg"}))
+              safeDataToBackend({myPokemonId: fightPokemon.id, enemyPokemonId :enemy.id, winner:true})
+              setEndGame(true)
+              setFirework(true)
+              return true
+          } else return false
+      } else return false
+      }
+      
 
     const fight = ()=>{
-            setFightActive(false)
+                setFightActive(false)
             setEnemyActive(true)
             if (!hp) setHp({poke1: fightPokemon.stats[0].base_stat, poke2: fightPokemon.stats[0].base_stat})
             const att= generateRandomAttack()
@@ -106,31 +112,10 @@ const checkEnd1= (att)=>{
                 })
     }, [])
 
-    // useEffect(()=>{
-    //     var myHeaders = new Headers();
-    //     myHeaders.append("Content-Type", "application/json");
-    
-    //     var raw = JSON.stringify(
-    //         {"user":{
-    //             "_id":"6058fa735f13784390116847",
-    //             "username":"benmon"},
-    //         "myPokemonId":34,
-    //         "enemyPokemonId":34,
-    //         "winner":true});
-    
-    //     var requestOptions = {
-    //     method: 'POST',
-    //     headers: myHeaders,
-    //      body: raw,
-    //     redirect: 'follow'
-    // };
-    
-    // fetch("https://pokemon-fightclub.herokuapp.com/users/game", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log('error', error));
-    // },[endGame])
+ 
 
+
+    // FIREWORK
     let fxProps = {
         count: 3,
         interval: 1000,
@@ -142,9 +127,37 @@ const checkEnd1= (att)=>{
         })
     }
 
+    //END GAME AND SAVE DATA IN BACKEND
+    const safeDataToBackend = (game)=>{
+        console.log(game)
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+    
+        var raw = JSON.stringify(
+            {"user":{
+                "_id":"6058fa735f13784390116847",
+                "username":"benmon"},
+            "myPokemonId": game.myPokemonId,
+            "enemyPokemonId":game.enemyPokemonId ,
+            "winner": game.winner});
+    
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+    
+    fetch("https://pokemon-fightclub.herokuapp.com/users/game", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    }
 
     return (
         <>
+        
         <div class="container">
         <div class="row test">  
         <div className="arena-header bounce">Welcome to the Arena</div>
@@ -152,10 +165,12 @@ const checkEnd1= (att)=>{
 
         <div class="row">
             <div class="col-md">
+            
             <MDBCol className={fightActive? "bounce img-fluid": ""}>
             <MDBCardImage className="img-fluid bounceInLeft" src={fightPokemon.sprites.other["official-artwork"].front_default} waves/>
                 <MDBCard style={{ width: "22rem" }} className="my-5">
                     <MDBCardBody>
+                    {firework? <Fireworks {...fxProps} /> : <></>}
                     <MDBCardTitle className="text-center">{fightPokemon.name.toUpperCase()}</MDBCardTitle>
                     {fightPokemon && <MDBCardText >
                     {fightPokemon.name} will use his abilities of {fightPokemon.abilities[0].ability.name} and {fightPokemon.abilities[1].ability.name} to attack
@@ -171,7 +186,7 @@ const checkEnd1= (att)=>{
                 </MDBCard>
             </MDBCol>
             </div>
-
+            
             <div class="col-md d-flex justify-content-center">
             { enemy? <MDBCol className={enemyActive? "bounce img-fluid": ""} >
             <MDBCardImage className="img-fluid bounceInRight" src={enemy.sprites.other["official-artwork"].front_default} waves />       
@@ -202,7 +217,7 @@ const checkEnd1= (att)=>{
                 width:40}}/>Select new Pokemon</MDBBtn>
 
             </Link>
-            <Link to="/choosePlayer">
+            <Link to="/leaderBoard">
             <MDBBtn outline color="info" > 
             <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
                 width:40}}/>FIGHT HISTORY</MDBBtn>
@@ -212,7 +227,6 @@ const checkEnd1= (att)=>{
             <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
                 width:40}}/>Exit Game</MDBBtn>
             </Link>
-           
             </div>
             </div>
 
