@@ -1,4 +1,4 @@
-import {React, useState, useEffect}  from 'react';
+import {React, useState, useEffect, useLayoutEffect}  from 'react';
 import {Link} from 'react-router-dom'
 import { MDBContainer, MDBAlert, MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBPopoverBody, MDBPopoverHeader, MDBPopover} from 'mdbreact';
 import '../style.css';
@@ -10,11 +10,14 @@ const Alert = ({name}) => {
     return (
       <MDBContainer>
         <MDBAlert color="warning" dismiss>
-          <strong>Holy guacamole!</strong> Your are too weak, you cannot defend yourself anymore. {name} will get some extra points.
+          <strong>Holy guacamole!</strong> Your are too weak, you cannot defend yourself anymore.  <strong>{name}</strong> will get some extra points.
         </MDBAlert>
       </MDBContainer>
     );
   };
+
+
+
 
 const Arena = ({fightPokemon, totalCount}) => {
 
@@ -32,21 +35,25 @@ const Arena = ({fightPokemon, totalCount}) => {
     return Math.floor(Math.random() *20)
     }
     
-  const checkEnd = () =>{
+  const checkEnd = (att) =>{
       if (hp){
-        if (hp.poke1 <1) {
+        if (hp.poke1-att <1) {
             console.log("poke one lost")
             setHp((prevState)=>({poke1:"You lost the fight", poke2 : prevState.poke2}))
             setEndGame(true)
             return true
         }
-        if (hp.poke2 <1) {
-            console.log("poke two lost")
-            setHp((prevState)=>({poke1:"Yeah you win the fight", poke2 : "You got me..arg"}))
-            setEndGame(true)
-            return true
-        } else return false
+    }}
+//changes
+const checkEnd1= (att)=>{
+    if (hp){
+        if (hp.poke2-att <1) {
+        console.log("poke two lost")
+        setHp((prevState)=>({poke1:"Yeah you win the fight", poke2 : "You got me..arg"}))
+        setEndGame(true)
+        return true
     } else return false
+} else return false
 }
 
 
@@ -56,18 +63,20 @@ const Arena = ({fightPokemon, totalCount}) => {
             setFightActive(false)
             setEnemyActive(true)
             if (!hp) setHp({poke1: fightPokemon.stats[0].base_stat, poke2: fightPokemon.stats[0].base_stat})
-            setHp((prevState)=>({...prevState, poke2 : prevState.poke2-(generateRandomAttack())}))
-            const gameEnd = checkEnd()
-            if (!gameEnd) {setTimeout(attack, 1000)}
-            }
+            const att= generateRandomAttack()
+            const gameEnd = checkEnd1(att)
+            if (!gameEnd) {
+                setHp((prevState)=>({...prevState, poke2 : prevState.poke2-att}))
+                {setTimeout(attack, 1000)}
+            }}
            
 
     const attack = ()=>{   
             setEnemyActive(false)      
             setFightActive(true)
-            const gameEnd = checkEnd()
-            if (!gameEnd) {setHp((prevState)=>({ poke1 : prevState.poke1-(generateRandomAttack()),poke2: prevState.poke2}))}
-            checkEnd()        
+            const att= generateRandomAttack()
+            const gameEnd = checkEnd(att)
+            if (!gameEnd) {setHp((prevState)=>({ poke1 : prevState.poke1-att,poke2: prevState.poke2}))}    
     }
     const defense= ()=>{
       
@@ -96,6 +105,31 @@ const Arena = ({fightPokemon, totalCount}) => {
                     console.log(fightPokemon)
                 })
     }, [])
+
+    // useEffect(()=>{
+    //     var myHeaders = new Headers();
+    //     myHeaders.append("Content-Type", "application/json");
+    
+    //     var raw = JSON.stringify(
+    //         {"user":{
+    //             "_id":"6058fa735f13784390116847",
+    //             "username":"benmon"},
+    //         "myPokemonId":34,
+    //         "enemyPokemonId":34,
+    //         "winner":true});
+    
+    //     var requestOptions = {
+    //     method: 'POST',
+    //     headers: myHeaders,
+    //      body: raw,
+    //     redirect: 'follow'
+    // };
+    
+    // fetch("https://pokemon-fightclub.herokuapp.com/users/game", requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => console.log(result))
+    //   .catch(error => console.log('error', error));
+    // },[endGame])
 
     let fxProps = {
         count: 3,
