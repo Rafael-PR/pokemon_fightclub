@@ -3,33 +3,26 @@ import {Link} from 'react-router-dom'
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol, MDBPopoverBody, MDBPopoverHeader, MDBPopover} from 'mdbreact';
 import '../style.css';
 import '../App.css'
+import { Fireworks } from 'fireworks/lib/react'
 
 const Arena = ({fightPokemon, totalCount}) => {
 
-   
-   
-    
     const [enemy, setEnemy]= useState();
     const [hp, setHp] = useState();
-    const [wait, setWait]= useState()
+    const [wait, setWait]= useState();
+    const [winner, setWinner] = useState(false)
 
-    useEffect(()=>{
-        setWait(true)
-    }, [hp])
-  
+    useEffect(()=>{ setWait(true) }, [hp])
     
-    const generateRandomAttack = ()=>{
-    return Math.floor(Math.random() *20)
-    }
-  
+    const generateRandomAttack = ()=>{ return Math.floor(Math.random() *20) }
 
     const fight = ()=>{
             if (!hp) setHp({poke1: fightPokemon.stats[0].base_stat, poke2: fightPokemon.stats[0].base_stat})
             setHp((prevState)=>({...prevState, poke2 : prevState.poke2-(generateRandomAttack())}))
             setTimeout(attack, 1000)
     }
+
     const attack = ()=>{          
-            
             setHp((prevState)=>({ poke1 : prevState.poke1-(generateRandomAttack()),poke2: prevState.poke2}))
             setWait(false)
     }
@@ -43,7 +36,6 @@ const Arena = ({fightPokemon, totalCount}) => {
     }
     
     const counter= ()=>{
- 
     if (hp) {
         if (hp.poke1 && hp.poke1 <1) return "You lost the fight!"
         if (hp.poke2 && hp.poke2 <1) return "You win the fight!"
@@ -52,7 +44,6 @@ const Arena = ({fightPokemon, totalCount}) => {
     else return fightPokemon.stats[0].base_stat
 }
     const counter2= ()=>{
- 
     if (hp) {
         if (hp.poke1 && hp.poke1 <1) return "I gotcha!"
         if (hp.poke2 && hp.poke2 <1) return 0
@@ -62,7 +53,7 @@ const Arena = ({fightPokemon, totalCount}) => {
 }
 
     
-useEffect(()=>{
+    useEffect(()=>{
             fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * totalCount)}`)
             .then(response => {
                 if (response.ok) {
@@ -77,8 +68,18 @@ useEffect(()=>{
                     console.log(jsonResponse)
                     console.log(fightPokemon)
                 })
- }, [])
+    }, [])
 
+    let fxProps = {
+        count: 3,
+        interval: 1000,
+        colors: ['purple', 'green', 'yellow'],
+        calc: (props, i) => ({
+        ...props,
+          x: (i + 1) * (window.innerWidth / 4) - (i + 1) * 100,
+          y: 200 + Math.random() * 100 - 50 + (i === 2 ? -80 : 0)
+        })
+    }
 
 
     return (
@@ -87,71 +88,61 @@ useEffect(()=>{
         <div class="row test">  
         <div className="arena-header bounce">Welcome to the Arena</div>
         </div>
+
         <div class="row">
             <div class="col-md">
             <MDBCol>
             <MDBCardImage className="img-fluid bounceInLeft" src={fightPokemon.sprites.other["official-artwork"].front_default} waves/>
                 <MDBCard style={{ width: "22rem" }} className="my-5">
                     <MDBCardBody>
-                    <MDBCardTitle>{fightPokemon.name.toUpperCase()}</MDBCardTitle>
-                    <MDBCardText >
-                        Some quick example text to build on the card title and make
-                        up the bulk of the card&apos;s content.
-                    </MDBCardText>
+                    <MDBCardTitle className="text-center">{fightPokemon.name.toUpperCase()}</MDBCardTitle>
+                    {fightPokemon && <MDBCardText >
+                    {fightPokemon.name} will use his abilities of {fightPokemon.abilities[0].ability.name} and {fightPokemon.abilities[1].ability.name} to attack
+                    </MDBCardText>}
                     <MDBBtn outline color="info" onClick={fight} >Attack</MDBBtn>
                     <MDBBtn outline color="info" onClick={defense}>Defense</MDBBtn>
-                    <MDBCardText className="mt-3">
+                    <MDBCardText className="mt-3 text-center">
                         Remaining HitPoints:
                         <p  className="text-center font-weight-bold bounce" style={{fontSize:35, color:"#0394fc"}}>{counter()}</p>
                     </MDBCardText>
                     </MDBCardBody>
-               
                 </MDBCard>
             </MDBCol>
             </div>
-          
+
             <div class="col-md d-flex justify-content-center">
             { enemy? <MDBCol >
             <MDBCardImage className="img-fluid bounceInRight" src={enemy.sprites.other["official-artwork"].front_default} waves />       
                 <MDBCard style={{ width: "22rem" }} className="my-5">
                     <MDBCardBody>
-                    <MDBCardTitle>{enemy.name.toUpperCase()}</MDBCardTitle>
-                    <MDBCardText>
-                        Some quick example text to build on the card title and make
-                        up the bulk of the card&apos;s content.
-                    </MDBCardText>
+                    <MDBCardTitle className="text-center">{enemy.name.toUpperCase()}</MDBCardTitle>
+                    {enemy && <MDBCardText>
+                    {enemy.name} will try to destroy you with {enemy.abilities[0].ability.name} and {enemy.abilities[1].ability.name}
+                    </MDBCardText>}
                     <MDBBtn className="invisible" outline color="info" >Attack</MDBBtn>
                     <MDBBtn className="invisible" outline color="info" >Defense</MDBBtn>
-                    <MDBCardText className="mt-3">
+                    <MDBCardText className="mt-3 text-center">
                         Remaining HitPoints:
                         <p  className="text-center font-weight-bold" style={{fontSize:35, color:"#0394fc"}}>{counter2()}</p>
                     </MDBCardText>
                     </MDBCardBody>
                 </MDBCard>
-                
             </MDBCol> : <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className={`pokeball ${wait? 'visible': 'invisible'}`} alt="logo" style={{
                 width:100, height:100}}/>}
-        
             </div>
-
+        </div>
+        </div>
         
-        </div>
-        </div>
         <div class="row">
             <div class="col-md d-flex justify-content-center">
             <Link to="/choosePlayer">
             <MDBBtn outline color="info" > 
-            
             <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
-                width:40}}/>Go Back to select a new Pokemon</MDBBtn>
+                width:40}}/>  Go Back to select a new Pokemon</MDBBtn>
             </Link>
             </div>
             </div>
-
-
-
         </>
-     
     )
 }
 
