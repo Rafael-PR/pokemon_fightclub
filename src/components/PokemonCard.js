@@ -62,7 +62,7 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
             </div>
 
             <MDBPopover placement='bottom' popover clickable id='popper2' >
-                <MDBBtn color="yellow" >Show more details</MDBBtn>
+                <MDBBtn color="yellow" className="black-text"> Show more details</MDBBtn>
                     <div>
                     <MDBPopoverHeader>DETAILS</MDBPopoverHeader>
                     <MDBPopoverBody color="yellow">
