@@ -22,7 +22,7 @@ class NavBar extends React.Component {
     return (
       <div>
         <header>
-          <Router>
+          {/* <Router> */}
             <MDBNavbar color="bg " fixed="top" dark expand="md" scrolling transparent>
               <MDBNavbarBrand >
                     <MDBNavLink  to="/"> <strong>Pokemom FightClub</strong></MDBNavLink>
@@ -40,13 +40,13 @@ class NavBar extends React.Component {
                   <MDBNavItem>
                     <MDBNavLink to="/LeaderBoard">LeaderBoard</MDBNavLink>
                   </MDBNavItem>
-                  <MDBNavItem>
+                  <MDBNavItem> 
                     <MDBNavLink to="/contact">Contact</MDBNavLink>
                   </MDBNavItem>
                 </MDBNavbarNav>
               </MDBCollapse>
             </MDBNavbar>
-          </Router>
+          {/* </Router> */}
          
           <MDBView src={process.env.PUBLIC_URL + '/img/pokemon-screensaver.jpg'}>
             <MDBMask overlay="blue-light" className="flex-center flex-column text-white text-center" >
