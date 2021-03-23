@@ -11,30 +11,30 @@ const LeaderBoard = () => {
                 <MDBTable hover>
       <MDBTableHead>
         <tr>
-          <th>#</th>
-          <th>First</th>
-          <th>Last</th>
-          <th>Handle</th>
+          <th>Username</th>
+          <th>MyPokemon</th>
+          <th>Enemy Pokemon</th>
+          <th>Winner</th>
         </tr>
       </MDBTableHead>
       <MDBTableBody>
         <tr>
           <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>Selma</td>
+          <td>M</td>
+          <td>Selma</td>
         </tr>
         <tr>
           <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
+          <td>Christin</td>
+          <td>T</td>
+          <td>Christin</td>
         </tr>
         <tr>
           <td>3</td>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
+          <td>Rafa</td>
+          <td>P</td>
+          <td>Rafa</td>
         </tr>
       </MDBTableBody>
     </MDBTable>
