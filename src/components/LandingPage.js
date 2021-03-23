@@ -81,7 +81,7 @@ Pokemon</p>
 
     <MDBContainer className="text-center" >
 
-    <iframe src="https://player.vimeo.com/video/315431464?autoplay=1&loop=1&color=5cd7d4&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    <iframe src="https://player.vimeo.com/video/315431464?autoplay=1&loop=1&color=5cd7d4&byline=0&portrait=0" width="1200" height="800" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
      {/* <Player poster={process.env.PUBLIC_URL + '/img/pokefight.jpg'}>
                 <source src="http://peach.themazzone.com/durian/movies/sintel-1024-surround.mp4" />
                 <source src="http://mirrorblender.top-ix.org/movies/sintel-1024-surround.mp4" />

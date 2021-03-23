@@ -18,56 +18,56 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
     return (
         <React.Fragment>
             <div className="col-md-3 col-sm-6 mb-5">
-                <div className="card">
-                    <div className="card-header">
+                <div className="card" style={{backgroundColor:'rgb(45, 111, 182)'}}>
+                    <div className="card-header" style={{backgroundColor:'rgb(45, 111, 182)'}}>
                         <h5>{name.toUpperCase()}</h5>
                     </div>
 
-                    <div className="card-img">
+                    <div className="card-img" style={{backgroundColor:'white'}}>
                         <img src={pokemonData.sprites.front_default}/>
                     </div>
 
                     
 
-                    <div class="hp-types">
+                    <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
                         <p className="hp-title">HP:</p>
                         <p className="hp-type">{pokemonData.stats[0].base_stat}</p>
                     </div>
                     
-                    <div class="card-data">
+                    <div class="card-data" style={{backgroundColor:'rgb(45, 111, 182)'}}>
                             <div className="Card__types">
                                 {pokemonData.types.map(type => {
                                 return (<div className="Card__type">{type.type.name}</div>)})}
                             </div>
                     </div>
 
-                        <div class="list-group-item">
-                                <p className="title">Weight</p>
+                        <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
+                                <p className="title">Weight :</p>
                                 <p className="card-content">{pokemonData.weight}</p>
                         </div>
 
-                        <div class="list-group-item">
-                            <p className="title">Height</p>
+                        <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
+                            <p className="title">Height :</p>
                             <p>{pokemonData.height}</p>
                         </div>
-                        <div class="list-group-item">
+                        {/* <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
                             <p className="title">Ability</p>
                             <p>{pokemonData.abilities[0].ability.name}</p>
-                        </div>
+                        </div> */}
 
-                    <div className="Card__info">
+                    <div className="Card__info" >
                     
                     
                     
             </div>
 
-            <MDBPopover placement='bottom' popover clickable id='popper2'>
-                <MDBBtn>Show more details</MDBBtn>
+            <MDBPopover placement='bottom' popover clickable id='popper2' >
+                <MDBBtn color="yellow" className="black-text"> Show more details</MDBBtn>
                     <div>
                     <MDBPopoverHeader>DETAILS</MDBPopoverHeader>
-                    <MDBPopoverBody>
+                    <MDBPopoverBody color="yellow">
                            
-                            <p className="hp-title">Attack:</p>
+                            <p className="hp-title" >Attack:</p>
                             <p className="hp-type">{pokemonData.stats[1].base_stat}</p>
                             <p className="hp-title">Defense:</p>
                             <p className="hp-type">{pokemonData.stats[2].base_stat}</p>
@@ -84,13 +84,14 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
 
 
             
+            <MDBBtn onClick={selectPokemon} color="yellow">Choose Pokemon</MDBBtn>
             
 
 
             
 
                     
-                    <button type="button" class="btn btn-primary" onClick={selectPokemon}>Choose Pokemon</button>
+                    {/* <button type="button" class="btn btn-primary" color="yellow" onClick={selectPokemon} >Choose Pokemon</button> */}
                 </div>
 
                 

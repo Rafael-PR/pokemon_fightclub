@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBMask } from "mdbreact";
+import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBMask,MDBNavLink, MDBLink } from "mdbreact";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const FooterPage = () => {
@@ -40,16 +40,23 @@ const FooterPage = () => {
             <MDBRow className="d-flex justify-content-center flex-shrink-1">
               <MDBCol lg="1" md="0"></MDBCol>
               <MDBCol  lg="3" md="4" sm="12">
+              <a href="https://github.com/ChristinThoma">
               <img src={process.env.PUBLIC_URL + '/img/Christimon1.png'} width="120" />
               <img src={process.env.PUBLIC_URL + '/img/Christimon.png'}width="150" />
+              </a>
               </MDBCol>
               <MDBCol lg="3" md="4" sm="12">
+                <a href="https://github.com/sm456456">
               <img src={process.env.PUBLIC_URL + '/img/Selmasam1.png'} width="120" />
               <img src={process.env.PUBLIC_URL + '/img/Selmasam.png'} width="150"/>
+                </a>
               </MDBCol >
               <MDBCol  lg="3" md="4" s="12">
+              <a href="https://github.com/Rafael-PR">
               <img src={process.env.PUBLIC_URL + '/img/Razason.png'} width="120"/>
               <img src={process.env.PUBLIC_URL + '/img/Rafazar.png'} width="150"/>
+              </a>
+              
               </MDBCol>
             
               <MDBCol md="2"></MDBCol>
