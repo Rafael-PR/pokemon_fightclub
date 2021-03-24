@@ -146,15 +146,15 @@ const Arena = ({fightPokemon}) => {
     return (
         <>
         
-        <div class="container">
-        <div class="row test">  
-        <MDBContainer>
-          <h1 className="text-center font-weight-bold" style={{fontSize: 60, color:'rgb(45, 111, 182)'}}>It's Showtime!</h1>
+        <div class="container" >
+        <div class="row">  
+        <MDBContainer className="d-flex justify-content-center m-5" >
+          <img src={process.env.PUBLIC_URL + '/img/ShowtimeBanner2.png'} style={{width:100+"%", borderBottom: "3px solid rgb(109,144,172, 0.7)", borderTop: "3px solid rgb(109,144,172, 0.7)" }} />
         </MDBContainer>
         </div>
 
-        <div class="row">
-            <div class="col-md">
+        <div class="row" >
+            <div class="col">
             {firework && <Fireworks {...fxProps} />}
             <MDBCol className={fightActive? "bounce img-fluid": ""}>
             <MDBCardImage className="img-fluid bounceInLeft" src={fightPokemon.sprites.other["official-artwork"].front_default} waves/>
@@ -179,7 +179,7 @@ const Arena = ({fightPokemon}) => {
             </MDBCol>
             </div>
             
-            <div class="col-md d-flex justify-content-center">
+            <div class="col d-flex justify-content-center">
             { enemy? <MDBCol className={enemyActive? "bounce img-fluid": ""} >
             <MDBCardImage className="img-fluid bounceInRight" src={enemy.sprites.other["official-artwork"].front_default} waves />       
                 <MDBCard style={{ width: "22rem" }} className="my-5">
