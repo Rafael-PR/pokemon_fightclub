@@ -66,9 +66,8 @@ const Arena = ({fightPokemon, totalCount}) => {
       
 
     const fight = ()=>{
-                setFightActive(false)
+            setFightActive(false)
             setEnemyActive(true)
-            if (!hp) setHp({poke1: fightPokemon.stats[0].base_stat, poke2: fightPokemon.stats[0].base_stat})
             const att= generateRandomAttack()
             const gameEnd = checkEnd1(att)
             if (!gameEnd) {
@@ -96,7 +95,7 @@ const Arena = ({fightPokemon, totalCount}) => {
     }
     
     useEffect(()=>{
-            fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * totalCount)}`)
+            fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 898)}`)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -107,6 +106,7 @@ const Arena = ({fightPokemon, totalCount}) => {
             })
                 .then((jsonResponse) => {
                     setEnemy(jsonResponse);
+                    if (!hp) setHp({poke1: fightPokemon.stats[0].base_stat, poke2: jsonResponse.stats[0].base_stat})
                     console.log(jsonResponse)
                     console.log(fightPokemon)
                 })
@@ -173,10 +173,13 @@ const Arena = ({fightPokemon, totalCount}) => {
                     {firework? <Fireworks {...fxProps} /> : <></>}
                     <MDBCardTitle className="text-center">{fightPokemon.name.toUpperCase()}</MDBCardTitle>
                     {fightPokemon && <MDBCardText >
-                    {fightPokemon.name} will use his abilities of {fightPokemon.abilities[0].ability.name} and {fightPokemon.abilities[1].ability.name} to attack
+                    {fightPokemon.name} will use his abilities of {fightPokemon?.abilities[0]?.ability.name} and {fightPokemon?.abilities[1]?.ability.name} to attack
                     </MDBCardText>}
+                    {!enemyActive &&
+                    <>
                     <MDBBtn outline color="info" onClick={fight} className={endGame? "invisible": ""} >Attack</MDBBtn>
                     <MDBBtn outline color="info" onClick={defense} className={defenceUsed.used || endGame ?"invisible": ""}>Defense</MDBBtn>
+                    </>}
                     <MDBCardText className="mt-3 text-center">
 
                         Remaining HitPoints:
@@ -194,7 +197,7 @@ const Arena = ({fightPokemon, totalCount}) => {
                     <MDBCardBody>
                     <MDBCardTitle className="text-center">{enemy.name.toUpperCase()}</MDBCardTitle>
                     {enemy && <MDBCardText>
-                    {enemy.name} will try to destroy you with {enemy.abilities[0].ability.name} and {enemy.abilities[1].ability.name}
+                    {enemy.name} will try to destroy you with {enemy?.abilities[0]?.ability.name} {enemy.abilities.length > 1 && "and"} {enemy?.abilities[1]?.ability.name}
                     </MDBCardText>}
                     <MDBBtn className="invisible" outline color="info" >Attack</MDBBtn>
                     <MDBBtn className="invisible" outline color="info" >Defense</MDBBtn>
