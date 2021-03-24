@@ -1,6 +1,5 @@
 import React from "react";
-import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBMask,MDBNavLink, MDBLink } from "mdbreact";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBMask, } from "mdbreact";
 
 const FooterPage = () => {
   return (
@@ -13,24 +12,24 @@ const FooterPage = () => {
               backgroundRepeat: 'no-repeat',
     }}>
 
-   <MDBMask overlay="blue-light" >
+    <MDBMask overlay="blue-light" >
       <MDBContainer fluid className="text-center text-md-left pt-5" >
         
         <MDBRow >
-          <MDBCol md="6" >
+          <MDBCol >
             <h4>
               This is a project which evolved during a WBS Coding School Course. We are the proud conducters of this fighting area where nobody gets hurt. Feel free to connect on LinkedIn.
             </h4>
             <MDBRow >             
-            <MDBCol md="12" lg="6" className="d-flex justify-content-between align-items-center bd-highlight mb-3 example-parent"  style={{ height: '150px' }}>     
+            {/* <MDBCol md="12" lg="6" className="d-flex justify-content-between align-items-center bd-highlight mb-3 example-parent"  style={{ height: '150px' }}>     
                     <a href="https://github.com/Rafael-PR/pokemon_fightclub"><i class="fab fa-facebook-square fa-4x"></i></a>
                     <a href="https://github.com/Rafael-PR/pokemon_fightclub"><i class="fab fa-github fa-4x"></i></a>
                     <a href="https://github.com/Rafael-PR/pokemon_fightclub"><i class="fab fa-youtube fa-4x"></i></a>
-            </MDBCol> 
+            </MDBCol>  */}
             </MDBRow> 
           </MDBCol>
+
           <MDBCol md="6" >
-         
             <MDBContainer>
             <MDBRow> 
               <MDBCol md="1"></MDBCol>
@@ -50,7 +49,7 @@ const FooterPage = () => {
               <img src={process.env.PUBLIC_URL + '/img/Selmasam1.png'} width="120" />
               <img src={process.env.PUBLIC_URL + '/img/Selmasam.png'} width="150"/>
                 </a>
-              </MDBCol >
+              </MDBCol>
               <MDBCol  lg="3" md="4" s="12">
               <a href="https://github.com/Rafael-PR">
               <img src={process.env.PUBLIC_URL + '/img/Razason.png'} width="120"/>
@@ -63,7 +62,6 @@ const FooterPage = () => {
             </MDBRow>
             </MDBContainer>
               
-         
           </MDBCol>
         </MDBRow>
       </MDBContainer>

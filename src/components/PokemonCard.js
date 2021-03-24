@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import { useHistory } from "react-router-dom"
 import { MDBPopover, MDBBtn, MDBPopoverBody, MDBPopoverHeader } from 'mdbreact';
 import '../style.css';
@@ -12,6 +12,7 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
         onChoosePokemon(pokemonData)
         history.push('/arena')
     }
+
     return (
         <React.Fragment>
             <div className="col-md-3 col-sm-6 mb-5">
@@ -23,8 +24,6 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
                     <div className="card-img" style={{backgroundColor:'white'}}>
                         <img src={pokemonData.sprites.front_default} style={{width:200}}/>
                     </div>
-
-                    
 
                     <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
                         <p className="hp-title">HP:</p>
@@ -38,24 +37,16 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
                             </div>
                     </div>
 
-                        <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
-                                <p className="title">Weight :</p>
-                                <p className="card-content">{pokemonData.weight}</p>
-                        </div>
+                    <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
+                            <p className="title">Weight :</p>
+                            <p className="card-content">{pokemonData.weight}</p>
+                    </div>
 
-                        <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
-                            <p className="title">Height :</p>
-                            <p>{pokemonData.height}</p>
-                        </div>
-                        {/* <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
-                            <p className="title">Ability</p>
-                            <p>{pokemonData.abilities[0].ability.name}</p>
-                        </div> */}
-
+                    <div class="hp-types" style={{backgroundColor:'rgb(45, 111, 182)'}}>
+                        <p className="title">Height :</p>
+                        <p>{pokemonData.height}</p>
+                    </div>
                     <div className="Card__info" >
-                    
-                    
-                    
             </div>
 
             <MDBPopover placement='bottom' popover clickable id='popper2' >
@@ -63,7 +54,6 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
                     <div>
                     <MDBPopoverHeader>DETAILS</MDBPopoverHeader>
                     <MDBPopoverBody color="yellow">
-                           
                             <p className="hp-title" >Attack:</p>
                             <p className="hp-type">{pokemonData.stats[1].base_stat}</p>
                             <p className="hp-title">Defense:</p>
@@ -74,27 +64,13 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
                             <p className="hp-type">{pokemonData.stats[4].base_stat}</p>
                             <p className="hp-title">Speed:</p>
                             <p className="hp-type">{pokemonData.stats[5].base_stat}</p>
-                        
                     </MDBPopoverBody>
                     </div>
             </MDBPopover>
 
-
-            
             <MDBBtn onClick={selectPokemon} color="yellow" className="black-text">Choose Pokemon</MDBBtn>
-            
-
-
-            
-
-                    
-                    {/* <button type="button" class="btn btn-primary" color="yellow" onClick={selectPokemon} >Choose Pokemon</button> */}
-                </div>
-
-                
-            
-            </div>
-            
+        </div>
+        </div>
         </React.Fragment>
     )
 }

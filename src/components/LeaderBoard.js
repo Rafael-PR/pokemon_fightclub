@@ -25,9 +25,10 @@ const LeaderBoard = () => {
             console.log(jsonResponse)
         })
 }, [])
+
     return (
-        <>
-                <MDBTable hover className="w-responsive text-center mx-auto p-3 mt-2">
+    <>
+      <MDBTable hover className="w-responsive text-center mx-auto p-3 mt-2">
       <MDBTableHead>
         <tr>
           <th>Username</th>
@@ -41,30 +42,10 @@ const LeaderBoard = () => {
           <td>{game.user.username}</td>
           <td>{game.myPokemonName}</td>
           <td>{game.enemyPokemonName}</td>
-          <td>{game.winner? "You won": "You lost"}</td>
+          <td>{game.winner ? "You won": "You lost"}</td>
         </tr>))}
-        {/* <tr>
-          <td>1</td>
-          <td>Selma</td>
-          <td>M</td>
-          <td>Selma</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Christin</td>
-          <td>T</td>
-          <td>Christin</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Rafa</td>
-          <td>P</td>
-          <td>Rafa</td>
-        </tr> */}
       </MDBTableBody>
     </MDBTable>
-
-
         </>
     )
 }

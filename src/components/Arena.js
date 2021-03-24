@@ -8,20 +8,16 @@ import { Fireworks } from 'fireworks/lib/react'
 
 const Alert = ({name}) => {
     return (
-      <MDBContainer>
+    <MDBContainer>
         <MDBAlert color="warning" dismiss>
-          <strong>Holy guacamole!</strong> Your are too weak, you cannot defend yourself anymore.  <strong>{name}</strong> will get some extra points.
+        <strong>Holy guacamole!</strong> Your are too weak, you cannot defend yourself anymore.  <strong>{name}</strong> will get some extra points.
         </MDBAlert>
-      </MDBContainer>
+    </MDBContainer>
     );
-  };
-
-
+};
 
 
 const Arena = ({fightPokemon}) => {
-
-
     const [enemy, setEnemy]= useState();
     const [endGame, setEndGame]= useState(false)
     const [hp, setHp] = useState();
@@ -29,33 +25,32 @@ const Arena = ({fightPokemon}) => {
     const [enemyActive, setEnemyActive]= useState(false)
     const [defenceUsed, setDefenceUsed]= useState({used:false, toWeak: false});
     const [firework, setFirework]=useState(false)
-  
+
 //FIGHT LOGIC
     const generateRandomAttack = ()=>{
         return Math.floor(Math.random() *25)
         }
     const checkEnd = (att) =>{
             if (hp){
-              if (hp.poke1-att <1) {
-                  setHp((prevState)=>({poke1:"You lost the fight", poke2 : prevState.poke2}))
-                  safeDataToBackend({myPokemonName: fightPokemon.name, enemyPokemonName :enemy.name, winner:false})
-                  setEndGame(true)
-                  return true
-              }
-          }}
-      
+            if (hp.poke1-att <1) {
+                setHp((prevState)=>({poke1:"You lost the fight", poke2 : prevState.poke2}))
+                safeDataToBackend({myPokemonName: fightPokemon.name, enemyPokemonName :enemy.name, winner:false})
+                setEndGame(true)
+                return true
+            }
+        }}
+
     const checkEnd1= (att)=>{
-          if (hp){
-              if (hp.poke2-att <1) {
-              setHp((prevState)=>({poke1:"Yeah you win the fight", poke2 : "You got me..arg"}))
-              safeDataToBackend({myPokemonName: fightPokemon.name, enemyPokemonName :enemy.name, winner:true})
-              setEndGame(true)
-              setFirework(true)
-              return true
-          } else return false
-      } else return false
-      }
-      
+        if (hp){
+            if (hp.poke2-att <1) {
+            setHp((prevState)=>({poke1:"Yeah you win the fight", poke2 : "You got me..arg"}))
+            safeDataToBackend({myPokemonName: fightPokemon.name, enemyPokemonName :enemy.name, winner:true})
+            setEndGame(true)
+            setFirework(true)
+            return true
+        } else return false
+    } else return false
+    }
 
     const fight = ()=>{
             setFightActive(false)
@@ -66,7 +61,6 @@ const Arena = ({fightPokemon}) => {
                 setHp((prevState)=>({...prevState, poke2 : prevState.poke2-att}))
                 {setTimeout(attack, 1000)}
             }}
-           
 
     const attack = ()=>{   
             setEnemyActive(false)      
@@ -75,11 +69,11 @@ const Arena = ({fightPokemon}) => {
             const gameEnd = checkEnd(att)
             if (!gameEnd) {setHp((prevState)=>({ poke1 : prevState.poke1-att,poke2: prevState.poke2}))}    
     }
+
     const defense= ()=>{
-      
         if (fightPokemon.stats[2].base_stat > enemy.stats[2].base_stat){
             setHp((prevState)=>({poke1: prevState.poke1 + generateRandomAttack(), poke2 : prevState.poke2 }))
-            setDefenceUsed({used:true, toWeak:false})
+            setDefenceUsed({used:false, toWeak:false})
         } else {
             setHp((prevState)=>({poke1: prevState.poke1 ,poke2 : prevState.poke2+ generateRandomAttack() }))
             setDefenceUsed({used:true, toWeak:true})
@@ -102,8 +96,6 @@ const Arena = ({fightPokemon}) => {
                 })
     }, [])
 
- 
-
 
     // FIREWORK
     let fxProps = {
@@ -117,9 +109,10 @@ const Arena = ({fightPokemon}) => {
         })
     }
 
+
     //END GAME AND SAVE DATA IN BACKEND
     const safeDataToBackend = (game)=>{
-           var myHeaders = new Headers();
+        var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
     
         var raw = JSON.stringify(
@@ -138,18 +131,17 @@ const Arena = ({fightPokemon}) => {
     };
     
     fetch("https://pokemon-fightclub.herokuapp.com/users/game", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
 
     return (
         <>
-        
         <div class="container" >
         <div class="row">  
         <MDBContainer className="d-flex justify-content-center m-5" >
-          <img src={process.env.PUBLIC_URL + '/img/ShowtimeBanner2.png'} style={{width:100+"%", borderBottom: "3px solid rgb(109,144,172, 0.7)", borderTop: "3px solid rgb(109,144,172, 0.7)" }} />
+            <img src={process.env.PUBLIC_URL + '/img/ShowtimeBanner2.png'} style={{width:100+"%", borderBottom: "3px solid rgb(109,144,172, 0.7)", borderTop: "3px solid rgb(109,144,172, 0.7)" }} />
         </MDBContainer>
         </div>
 
@@ -170,7 +162,6 @@ const Arena = ({fightPokemon}) => {
                     <MDBBtn outline color="info" onClick={defense} className={defenceUsed.used || endGame ?"invisible": ""}>Defense</MDBBtn>
                     </>}
                     <MDBCardText className="mt-3 text-center">
-
                         Remaining HitPoints:
                         <p  className="text-center font-weight-bold bounce" style={{fontSize:35, color:"#0394fc"}}>{hp? hp.poke1 : fightPokemon.stats[0].base_stat}</p>
                     </MDBCardText>
@@ -186,7 +177,7 @@ const Arena = ({fightPokemon}) => {
                     <MDBCardBody>
                     <MDBCardTitle className="text-center">{enemy.name.toUpperCase()}</MDBCardTitle>
                     {enemy && <MDBCardText>
-                    {enemy.name} will try to destroy you with {enemy?.abilities[0]?.ability.name} {enemy.abilities.length > 1 && "and"} {enemy?.abilities[1]?.ability.name}
+                    {enemy.name} will try to destroy you with {enemy?.abilities[0]?.ability.name} {enemy.abilities.length > 1 && "and"} {enemy?.abilities[1]?.ability.name} 
                     </MDBCardText>}
                     <MDBBtn className="invisible" outline color="info" >Attack</MDBBtn>
                     <MDBBtn className="invisible" outline color="info" >Defense</MDBBtn>
@@ -207,7 +198,6 @@ const Arena = ({fightPokemon}) => {
             <MDBBtn outline color="info" > 
             <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball mr-3" alt="logo" style={{
                 width:40}}/>New Pokemon</MDBBtn>
-
             </Link>
             <Link to="/leaderBoard">
             <MDBBtn outline color="info" > 
@@ -217,11 +207,10 @@ const Arena = ({fightPokemon}) => {
             <Link to="/">
             <MDBBtn outline color="info" > 
             <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball mr-3" alt="logo" style={{
-                width:40}}/>Homepage</MDBBtn>
+                width:40}}/>Home page</MDBBtn>
             </Link>
             </div>
             </div>
-
         </>
     )
 }
