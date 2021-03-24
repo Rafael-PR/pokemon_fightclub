@@ -140,7 +140,7 @@ const Arena = ({fightPokemon, totalCount}) => {
                 "username":"benmon"},
             "myPokemonId": game.myPokemonId,
             "enemyPokemonId":game.enemyPokemonId ,
-            "winner": game.winner});
+            "winner": game.winner.toString()});
     
         var requestOptions = {
         method: 'POST',
