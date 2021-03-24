@@ -101,25 +101,6 @@ useEffect(()=>{
 },[])
 
 
-// useEffect(()=>{
-//   var myHeaders = new Headers();
-//   myHeaders.append("Content-Type", "application/json");
-  
-//   var raw = JSON.stringify({"email":"ben@t-online.de","password":"passdsfsdfdft","myPokemonId":34,"enemyPokemonId":35,"winner":true});
-  
-//   var requestOptions = {
-//     method: 'POST',
-//     headers: myHeaders,
-//     body: raw,
-//     redirect: 'follow'
-//   };
-  
-//   fetch("https://pokemon-fightclub.herokuapp.com/users", requestOptions)
-//     .then(response => response.text())
-//     .then(result => console.log(result))
-//     .catch(error => console.log('error', error));
-// },[])
-
 
 // const post= ()=> {fetch('https://pokemon-fightclub.herokuapp.com/users', {
 //         method: 'POST',
