@@ -18,14 +18,14 @@ class NavBar extends React.Component {
     });
   }
 
+
   render() {
     return (
       <div>
         <header>
-          {/* <Router> */}
-            <MDBNavbar color="bg " fixed="top" dark expand="md" scrolling transparent>
-              <MDBNavbarBrand >
-                    <MDBNavLink  to="/"> <strong>Pokemom FightClub</strong></MDBNavLink>
+            <MDBNavbar color="bg-primary" fixed="top" dark expand="md" scrolling transparent>
+            <MDBNavbarBrand href="/">
+                <strong>Pokemom FightClub</strong>
               </MDBNavbarBrand>
               {!this.state.isWideEnough && <MDBNavbarToggler onClick={this.onClick} />}
               <MDBCollapse isOpen={this.state.collapse} navbar>
@@ -46,9 +46,8 @@ class NavBar extends React.Component {
                 </MDBNavbarNav>
               </MDBCollapse>
             </MDBNavbar>
-          {/* </Router> */}
          
-          <MDBView src={process.env.PUBLIC_URL + '/img/pokemon-screensaver.jpg'}>
+          <MDBView src={process.env.PUBLIC_URL + '/img/pokemon-screensaver.jpg'} >
             <MDBMask overlay="blue-light" className="flex-center flex-column text-white text-center" >
             <img src={process.env.PUBLIC_URL + '/img/FightClub.png'} style={{
                 width:600,

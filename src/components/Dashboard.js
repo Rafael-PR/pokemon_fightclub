@@ -3,7 +3,6 @@ import PokemonCardFrame from './PokemonCardFrame';
 import { MDBPagination, MDBPageItem, MDBPageNav, MDBCol, MDBRow } from "mdbreact";
 
 const Dashboard = ({pokemon, onChoosePokemon, pageHandler}) => {
-    console.log(pokemon)
     return (
         <>
         <div className="row" style={{backgroundColor:'rgb(109,144,172, 0.7)'}}>
