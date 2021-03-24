@@ -19,7 +19,7 @@ const Alert = ({name}) => {
 
 
 
-const Arena = ({fightPokemon, totalCount}) => {
+const Arena = ({fightPokemon}) => {
 
 
     const [enemy, setEnemy]= useState();
@@ -29,13 +29,7 @@ const Arena = ({fightPokemon, totalCount}) => {
     const [enemyActive, setEnemyActive]= useState(false)
     const [defenceUsed, setDefenceUsed]= useState({used:false, toWeak: false});
     const [firework, setFirework]=useState(false)
-    // const [dataForBackend, setDataForBackend] = useState()
-
-    
-   
-
-
-
+  
 //FIGHT LOGIC
     const generateRandomAttack = ()=>{
         return Math.floor(Math.random() *25)
@@ -43,9 +37,8 @@ const Arena = ({fightPokemon, totalCount}) => {
     const checkEnd = (att) =>{
             if (hp){
               if (hp.poke1-att <1) {
-                  console.log("poke one lost")
                   setHp((prevState)=>({poke1:"You lost the fight", poke2 : prevState.poke2}))
-                  safeDataToBackend({myPokemonId: fightPokemon.id, enemyPokemonId :enemy.id, winner:false})
+                  safeDataToBackend({myPokemonName: fightPokemon.name, enemyPokemonName :enemy.name, winner:false})
                   setEndGame(true)
                   return true
               }
@@ -54,9 +47,8 @@ const Arena = ({fightPokemon, totalCount}) => {
     const checkEnd1= (att)=>{
           if (hp){
               if (hp.poke2-att <1) {
-              console.log("poke two lost")
               setHp((prevState)=>({poke1:"Yeah you win the fight", poke2 : "You got me..arg"}))
-              safeDataToBackend({myPokemonId: fightPokemon.id, enemyPokemonId :enemy.id, winner:true})
+              safeDataToBackend({myPokemonName: fightPokemon.name, enemyPokemonName :enemy.name, winner:true})
               setEndGame(true)
               setFirework(true)
               return true
@@ -107,8 +99,6 @@ const Arena = ({fightPokemon, totalCount}) => {
                 .then((jsonResponse) => {
                     setEnemy(jsonResponse);
                     if (!hp) setHp({poke1: fightPokemon.stats[0].base_stat, poke2: jsonResponse.stats[0].base_stat})
-                    console.log(jsonResponse)
-                    console.log(fightPokemon)
                 })
     }, [])
 
@@ -129,17 +119,15 @@ const Arena = ({fightPokemon, totalCount}) => {
 
     //END GAME AND SAVE DATA IN BACKEND
     const safeDataToBackend = (game)=>{
-        console.log(game)
-
-        var myHeaders = new Headers();
+           var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
     
         var raw = JSON.stringify(
             {"user":{
-                "_id":"6058fa735f13784390116847",
+                "_id":"605b5c9bdbab924ac8e063fa",
                 "username":"benmon"},
-            "myPokemonId": game.myPokemonId,
-            "enemyPokemonId":game.enemyPokemonId ,
+            "myPokemonName": game.myPokemonName,
+            "enemyPokemonName":game.enemyPokemonName ,
             "winner": game.winner.toString()});
     
         var requestOptions = {
@@ -160,17 +148,18 @@ const Arena = ({fightPokemon, totalCount}) => {
         
         <div class="container">
         <div class="row test">  
-        <div className="arena-header bounce">Welcome to the Arena</div>
+        <MDBContainer>
+          <h1 className="text-center font-weight-bold" style={{fontSize: 60, color:'rgb(45, 111, 182)'}}>It's Showtime!</h1>
+        </MDBContainer>
         </div>
 
         <div class="row">
             <div class="col-md">
-            
+            {firework && <Fireworks {...fxProps} />}
             <MDBCol className={fightActive? "bounce img-fluid": ""}>
             <MDBCardImage className="img-fluid bounceInLeft" src={fightPokemon.sprites.other["official-artwork"].front_default} waves/>
                 <MDBCard style={{ width: "22rem" }} className="my-5">
                     <MDBCardBody>
-                    {firework? <Fireworks {...fxProps} /> : <></>}
                     <MDBCardTitle className="text-center">{fightPokemon.name.toUpperCase()}</MDBCardTitle>
                     {fightPokemon && <MDBCardText >
                     {fightPokemon.name} will use his abilities of {fightPokemon?.abilities[0]?.ability.name} and {fightPokemon?.abilities[1]?.ability.name} to attack
@@ -212,23 +201,23 @@ const Arena = ({fightPokemon, totalCount}) => {
         </div>
         </div>
         {defenceUsed.toWeak && <Alert name={enemy.name}/>}
-        <div class="row">
+        <div class="row" className="mb-5">
             <div class="col-md d-flex justify-content-center">
             <Link to="/choosePlayer">
             <MDBBtn outline color="info" > 
-            <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
-                width:40}}/>Select new Pokemon</MDBBtn>
+            <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball mr-3" alt="logo" style={{
+                width:40}}/>New Pokemon</MDBBtn>
 
             </Link>
             <Link to="/leaderBoard">
             <MDBBtn outline color="info" > 
-            <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
+            <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball mr-3" alt="logo" style={{
                 width:40}}/>FIGHT HISTORY</MDBBtn>
             </Link>
             <Link to="/">
             <MDBBtn outline color="info" > 
-            <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball" alt="logo" style={{
-                width:40}}/>Exit Game</MDBBtn>
+            <img src={process.env.PUBLIC_URL + '/img/Pokéball.png'} className="pokeball mr-3" alt="logo" style={{
+                width:40}}/>Homepage</MDBBtn>
             </Link>
             </div>
             </div>

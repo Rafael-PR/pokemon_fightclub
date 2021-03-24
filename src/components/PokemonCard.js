@@ -12,9 +12,6 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
         onChoosePokemon(pokemonData)
         history.push('/arena')
     }
-
-    console.log(pokemonData)
-
     return (
         <React.Fragment>
             <div className="col-md-3 col-sm-6 mb-5">
@@ -24,7 +21,7 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
                     </div>
 
                     <div className="card-img" style={{backgroundColor:'white'}}>
-                        <img src={pokemonData.sprites.front_default}/>
+                        <img src={pokemonData.sprites.front_default} style={{width:200}}/>
                     </div>
 
                     
@@ -84,7 +81,7 @@ const PokemonCard = ({ pokemonData, onChoosePokemon}) => {
 
 
             
-            <MDBBtn onClick={selectPokemon} color="yellow">Choose Pokemon</MDBBtn>
+            <MDBBtn onClick={selectPokemon} color="yellow" className="black-text">Choose Pokemon</MDBBtn>
             
 
 

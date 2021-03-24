@@ -27,7 +27,7 @@ const LeaderBoard = () => {
 }, [])
     return (
         <>
-                <MDBTable hover>
+                <MDBTable hover className="w-responsive text-center mx-auto p-3 mt-2">
       <MDBTableHead>
         <tr>
           <th>Username</th>
@@ -39,8 +39,8 @@ const LeaderBoard = () => {
       <MDBTableBody>
       {leaderBoardData && leaderBoardData.map((game)=> (<tr>
           <td>{game.user.username}</td>
-          <td>{game.myPokemonId}</td>
-          <td>{game.enemyPokemonId}</td>
+          <td>{game.myPokemonName}</td>
+          <td>{game.enemyPokemonName}</td>
           <td>{game.winner? "You won": "You lost"}</td>
         </tr>))}
         {/* <tr>

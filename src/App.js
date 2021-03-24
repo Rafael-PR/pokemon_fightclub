@@ -7,8 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 
@@ -26,8 +25,7 @@ function App() {
   const[pokemon, setPokemon] = useState();
   const [chosenPokemon, setChosenPokemon]= useState();
   const [pageOffset, setPageOffset] =useState(0);
-  const [totalResults, setTotalResults]=useState(0);
-  const [users, setUsers]=useState()
+  const [totalResults, setTotalResults]=useState(0)
 
  
 
@@ -71,54 +69,6 @@ function App() {
       // })
 
   },[pageOffset])
-
-
-// useEffect(()=>{
-//     fetch(`https://pokemon-fightclub.herokuapp.com/users`)
-//     .then(response => {
-//         if (response.ok) {
-//             return response.json();
-//         }
-//         throw new Error('Request failed!');
-//     }, networkError => {
-//         alert("Connection failed, please try again");
-//     })
-//         .then((jsonResponse) => {
-//             setUsers(jsonResponse);
-//             console.log(jsonResponse)
-//         })
-// }, [])
-
-useEffect(()=>{
-  axios.get('https://pokemon-fightclub.herokuapp.com/users')
-  .then(res=>{
-      console.log(res)
-      setUsers(res.data)
-  })
-  .catch(err=>{
-      console.log(err)
-  })
-},[])
-
-
-
-// const post= ()=> {fetch('https://pokemon-fightclub.herokuapp.com/users', {
-//         method: 'POST',
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//           "email": "Selmon@t-online.de",
-//           "password": "passwort",
-//           "myPokemonId": 30,
-//           "enemyPokemonId": 40,
-//           "winner": true
-//         })
-//     });
-//   }
-
-
 
 
 const handleChoosePokemon = (Pokemon) => {
